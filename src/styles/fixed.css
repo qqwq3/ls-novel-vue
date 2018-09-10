@@ -1,0 +1,50 @@
+
+html{ font-size: 24px;}
+
+@media only screen and (max-width: 414px) {
+  html{ font-size: 16px;}
+}
+
+@media only screen and (max-width: 375px) {
+  html{ font-size: 14px;}
+}
+
+@media only screen and (max-width: 360px) {
+  html{ font-size: 13px;}
+}
+
+@media only screen and (max-width: 320px) {
+  html{ font-size: 12px;}
+}
+
+html,body,div,p,h1,ul,ol,li,dl,dt,dd,table,th,td,input,select,textarea,strong,label,span,font,a,b,i,img
+{
+  margin: 0;
+  padding: 0;
+  font-family: Microsoft YaHei, Arial, sans-serif;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-text-size-adjust:none;/*禁用iPhone中Safari的字号自动调整 */
+}
+
+html,body{ height: 100%;}
+body{ min-width:320px; max-width:640px; margin:0 auto; position:relative;}
+ul,ol,li,dl,dt,dd{list-style: none;}
+input{-webkit-appearance: none;}
+table{border-collapse:collapse;border-spacing:0;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+pre,code,kbd,samp{font-family:inherit;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{
+  display:block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
