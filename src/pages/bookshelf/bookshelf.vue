@@ -25,6 +25,8 @@
       <!--<button @click="RESET">点我改变名字</button>-->
     </div>
 
+    <!-- 点击进入书架详情页 -->
+    <div @click="onPressMe" class="click-details">点击我进入书架详情</div>
   </div>
 </template>
 
@@ -35,6 +37,9 @@
     name: "bookshelf",
     created(){
       // console.log('bookshelf', this.$store);
+    },
+    mounted(){
+
     },
     data(){
       return {
@@ -50,9 +55,13 @@
         return this.$store.state.name;
       }
     },
-
     // 方式一
     methods:{
+      // 点击我进入详情
+      onPressMe(){
+        let router = this.$router;
+        return router.push({name: 'bookshelfDetails'});
+      },
       clickAdd(){
         this.$store.dispatch('add', 1);
       },
@@ -60,13 +69,22 @@
         this.$store.dispatch('reset', 'abc');
       }
     }
-
     // 方式二
     // methods: mapMutations(['ADD','RESET'])
   }
 </script>
 
 <style scoped>
+  .click-details{
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    background: #e5e5e5;
+    margin-top: 40px;
+    margin-left: 40px;
+  }
   .content {
     flex: 1;
   }

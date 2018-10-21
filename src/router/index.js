@@ -1,23 +1,39 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import bookshelf from '@/pages/bookshelf/bookshelf'
-import bookCity from '@/pages/bookCity/bookCity'
-import rankings from '@/pages/rankings/rankings'
-import classification from '@/pages/classification/classification'
-import my from '@/pages/my/my'
+import Vue from 'vue';
+import Router from 'vue-router';
+import bookshelf from '@/pages/bookshelf/bookshelf';
+import bookCity from '@/pages/bookCity/bookCity';
+import rankings from '@/pages/rankings/rankings';
+import classification from '@/pages/classification/classification';
+import my from '@/pages/my/my';
+import bookshelfDetails from '@/pages/bookshelf/bookshelfDetails';
 
-Vue.use(Router)
+Vue.use(Router);
 
 let router = new Router({
+  mode: 'history',
   routes: [
     // 书架
     {
       path: '/bookshelf',
       name: 'bookshelf',
+      component: bookshelf,
       // 页面懒加载写法一
-      component: () => import('@/pages/bookshelf/bookshelf')
+      // component: () => import('@/pages/bookshelf/bookshelf'),
       // 页面懒加载写法二
       // component: (resolve) => require(['@/pages/bookshelf/bookshelf'], resolve)
+      // children: [
+      //   {
+      //     path: '/bookshelf/bookshelfDetails',
+      //     name: 'bookshelfDetails',
+      //     component: bookshelfDetails
+      //   }
+      // ]
+    },
+    // 书架详情
+    {
+      path: '/bookshelfDetails',
+      name: 'bookshelfDetails',
+      component: bookshelfDetails
     },
     // 书城
     {

@@ -1,16 +1,77 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
-import * as localforage from 'localforage'
-import Vue from 'vue'
-import App from './App'
-import router from './router'
-import './styles/fixed.css'
-import './styles/common.css'
-import tabBottom from '@/components/tabBottom'
-import tabContent from '@/components/tabContent'
+import Vue from 'vue';
+import App from './App';
+// 路由
+import router from './router';
+// 引入样式
+import './styles/fixed.css';
+import './styles/common.css';
+// 底部tab组件
+import tabBottom from '@/components/tabBottom';
+// 内容组件
+import tabContent from '@/components/tabContent';
+// http
 import {$get , $post, $put, $delete} from './common/http';
+// vuex - store
 import store from '@/store/index';
+// 引入储存库
+import * as localforage from 'localforage';
+// 引入velocity动画库
+import 'velocity-animate';
+
+// 时间格式化过滤器，输入内容是number或者Date对象，输出是YYYY-MM-DD HH-MM-SS。使用：{{num | formatTime}}
+Vue.filter('formatTime', function (value) {
+  Date.prototype.Format = function (fmt) { 
+    var o = {
+      "M+": this.getMonth() + 1, //月份
+      "d+": this.getDate(), //日
+      "h+": this.getHours(), //小时
+      "m+": this.getMinutes(), //分
+      "s+": this.getSeconds(), //秒
+      "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+      "S": this.getMilliseconds() //毫秒
+    };
+
+    if (/(y+)/.test(fmt)) 
+      fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+
+    for (var k in o)
+      if (new RegExp("(" + k + ")").test(fmt))
+        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+
+    return fmt;
+  }
+
+  // return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
+  return new Date(value).Format("yyyy-MM-dd");
+});
+
+// 自定义指令 - 钩子
+Vue.directive('song', {
+  bind: (el, binding) => { // 被绑定
+    console.log('1 - bind', el, binding, binding.value);
+  },
+  inserted: (el, binding) => { // 绑定到节点
+    console.log('2 - inserted', el, binding);
+  },
+  update: () => { // 组件更新
+    console.log('3 - update');
+  },
+  componentUpdated: () => { // 组件更新完成
+    console.log('4 - componentUpdated');
+  },
+  unbind: () => { // 解绑
+    console.log('5 - unbind');
+  }
+});
+
+// 自定义指令 - 函数
+Vue.directive('lee', (el, binding) => {
+  console.log(el); // 标签
+  console.log(binding); // 输出的是一个对象obj
+});
 
 Vue.prototype.$get = $get;
 Vue.prototype.$post = $post;
@@ -57,10 +118,8 @@ localforage.config({
 
 // 生成全局的localforage
 Vue.prototype.localforage = localforage;
-
 // 注册全局组件 - 底部导航
 Vue.component('tab-bottom', tabBottom);
-
 // 注册全局组件 - 导航对应的内容
 Vue.component('tab-content', tabContent);
 
